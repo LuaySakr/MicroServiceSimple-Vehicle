@@ -7,8 +7,8 @@ module.exports = function(app){
 	
 	app.post('/api/vehicles', VehicleController.PostVehicle);
 
-	app.put('/api/vehicles/:vehicle_id', VehicleController.UpdateVehicle);
+	app.put('/api/vehicles/:number', VehicleController.UpdateVehicle);
 
-	app.delete('/api/vehicles/:vehicle_id', VehicleController.DeleteVehicle);
+	app.delete('/api/vehicles/:number', VehicleController.DeleteVehicle);
 
 }

@@ -5,13 +5,17 @@ var VehicleCtrl = function(Vehicle){
 	var VehicleObj = {};
 
 	VehicleObj.PostVehicle = function(req, res, next){
+		console.log(req);
 		var newVehicle = new Vehicle(req.body);
 		newVehicle.save(function(err, vehicle){
 			if(err){
+				console.log("=============")
+				console.log(err)
+				console.log("=============")
 				res.json({status: false, error: err.message});
 				return;
 			}
-			res.json({status: true, vehicle: vehicle});
+			res.json({status: true, number: req.body});
 		});
 	}
 
@@ -27,7 +31,7 @@ var VehicleCtrl = function(Vehicle){
 
 	VehicleObj.UpdateVehicle = function(req, res, next){
 		var completed = req.body.completed;
-		Vehicle.findById(req.params.vehicle_id, function(err, vehicle){
+		Vehicle.findById(req.params.number, function(err, vehicle){
 			vehicle.completed = completed;
 			vehicle.save(function(err, vehicle){
 				if(err) {
@@ -39,7 +43,7 @@ var VehicleCtrl = function(Vehicle){
 	}
 
 	VehicleObj.DeleteVehicle = function(req, res, next){
-		Vehicle.remove({_id : req.params.vehicle_id }, function(err, vehicle){
+		Vehicle.remove({number : req.params.number }, function(err, vehicle){
 			if(err) {
 				res.json({status: false, error: "Deleting vehicle is not successfull"});
 			}

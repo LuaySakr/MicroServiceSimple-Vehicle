@@ -3,14 +3,20 @@ var Schema = mongoose.Schema;
 
 // Vehicle schema
 var VehicleSchema = new Schema({
-	vehicle: String,
+	number: Number,
+	vehicleId: String,
+	regNum: String,
 	completed: { type:Boolean, default: false },
 	created_by: { type: Date, default: Date.now }
 });
 
 // True since it is a parallel middleware
 VehicleSchema.pre('save', function(next, done) {
-	if(!this.vehicle){
+	if(!this.number){
+		console.log("000000000")
+			
+		console.log(this)
+		console.log("000000000")
 		next(new Error("vehicle should not be null"));
 	}
   	next();
