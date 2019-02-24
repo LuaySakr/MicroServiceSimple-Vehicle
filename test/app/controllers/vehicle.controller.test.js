@@ -3,13 +3,9 @@
 var should = require('should'),
 	sinon = require('sinon'),
 	mongoose = require('mongoose');
-
 require('sinon-mongoose');
-
 var VehicleModel = require('../../../app/models/vehicle.model');
-
 describe('VehicleController testing', function () {
-
 	describe('Vehicle Post test', function () {
 		
 		it('Should call save only once', function () {
@@ -27,15 +23,12 @@ describe('VehicleController testing', function () {
 			VehicleController.PostVehicle(req, res, next);
 			sinon.assert.calledOnce(saveStub);
 		});
-
 		it('Should save vehicle', function (done) {
 			var vehicleMock = sinon.mock(new VehicleModel({ vehicle: 'Save new vehicle from mock'}));
 			var vehicle = vehicleMock.object;
-
 			vehicleMock
 			.expects('save')
 			.yields(null, 'SAVED');
-
 			vehicle.save(function(err, result) {
 				vehicleMock.verify();
 				vehicleMock.restore();
@@ -43,16 +36,13 @@ describe('VehicleController testing', function () {
 				done();
 			});
 		});
-
 	});
-
 	describe('Get all Vehicle test', function () {
 		it('Should call find once', function (done) {
 			var VehicleMock = sinon.mock(VehicleModel);
 			VehicleMock
 			.expects('find')
 			.yields(null, 'VEHICLES');
-
 			VehicleModel.find(function (err, result) {
 				VehicleMock.verify();
 				VehicleMock.restore();
@@ -61,43 +51,33 @@ describe('VehicleController testing', function () {
 			});
 		});
 	});
-
 	describe('Delete vehicle test', function () {
 		it('Should delete vehicle of gived id', function (done) {
 			var VehicleMock = sinon.mock(VehicleModel);
-
 			VehicleMock
 			.expects('remove')
 			.withArgs({_id: 12345})
 			.yields(null, 'DELETED');
-
 			VehicleModel.remove({_id: 12345}, function(err, result){
 				VehicleMock.verify();
 				VehicleMock.restore();
 				done();
 			})
-
-
 		});
 	});
-
 	describe('Update a vehicle', function () {
 		it('Should update the vehicle with new value', function (done) {
 			var vehicleMock = sinon.mock(new VehicleModel({ vehicle: 'Save new vehicle from mock'}));
 			var vehicle = vehicleMock.object;
-
 			vehicleMock
 			.expects('save')
 			.withArgs({_id: 12345})
 			.yields(null, 'UPDATED');
-
 			vehicle.save({_id: 12345}, function(err, result){
 				vehicleMock.verify();
 				vehicleMock.restore();
 				done();
 			})
-
 		});
 	});
-
 });

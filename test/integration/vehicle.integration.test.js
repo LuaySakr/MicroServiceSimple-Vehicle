@@ -1,16 +1,12 @@
 "use strict";
-
 var should = require('should'),
 	request = require('supertest'),
 	app = require('../../server.js'),
 	mongoose = require('mongoose'),
 	Vehicle = mongoose.model('Vehicle'),
 	agent = request.agent(app);
-
 describe('Vehicle CRUD integration testing', function () {
-
 	describe('Get all vehicle', function () {
-
 		before(function (done) {
 			var newVehicle = { vehicle: "Vehicle from hooks" };
 			agent
@@ -19,7 +15,6 @@ describe('Vehicle CRUD integration testing', function () {
 				done();
 			})
 		});
-
 		it('Should get status equal success and array of vehicle', function (done) {
 			agent
 			.get('/api/vehicles')
@@ -59,7 +54,6 @@ describe('Vehicle CRUD integration testing', function () {
 				done();
 			})
 		});
-
 		it('Should delete the vehicle by _id', function (done) {
 			agent
 			.delete('/api/vehicles/'+id)
@@ -69,9 +63,7 @@ describe('Vehicle CRUD integration testing', function () {
 			})
 			
 		});
-
 	});
-
 	describe('Update a vehicle', function () {
 		var id;
 		before(function (done) {
@@ -84,7 +76,6 @@ describe('Vehicle CRUD integration testing', function () {
 				done();
 			})
 		});
-
 		it('Should update the completed status of vehicle by _id to true', function (done) {
 			var params = { completed: true };
 			agent
@@ -97,6 +88,4 @@ describe('Vehicle CRUD integration testing', function () {
 			
 		});
 	});
-
 });
-

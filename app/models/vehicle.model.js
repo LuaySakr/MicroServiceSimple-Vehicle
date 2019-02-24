@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 // Vehicle schema
 var VehicleSchema = new Schema({
 	number: Number,
@@ -9,7 +8,6 @@ var VehicleSchema = new Schema({
 	completed: { type:Boolean, default: false },
 	created_by: { type: Date, default: Date.now }
 });
-
 // True since it is a parallel middleware
 VehicleSchema.pre('save', function(next, done) {
 	if(!this.number){
@@ -21,7 +19,5 @@ VehicleSchema.pre('save', function(next, done) {
 	}
   	next();
 });
-
 var VehicleModel = mongoose.model('Vehicle', VehicleSchema);
-
 module.exports = VehicleModel;

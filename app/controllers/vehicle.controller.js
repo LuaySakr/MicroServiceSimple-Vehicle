@@ -1,9 +1,6 @@
 "use strict";
-
 var VehicleCtrl = function(Vehicle){
-
 	var VehicleObj = {};
-
 	VehicleObj.PostVehicle = function(req, res, next){
 		console.log(req);
 		var newVehicle = new Vehicle(req.body);
@@ -18,7 +15,6 @@ var VehicleCtrl = function(Vehicle){
 			res.json({status: true, number: req.body});
 		});
 	}
-
 	VehicleObj.GetVehicle = function(req, res, next){
 		Vehicle.find(function(err, vehicle){
 			if(err) {
@@ -28,7 +24,6 @@ var VehicleCtrl = function(Vehicle){
 			res.json({status: true, vehicle: vehicle});
 		});
 	}
-
 	VehicleObj.UpdateVehicle = function(req, res, next){
 		var completed = req.body.completed;
 		Vehicle.findById(req.params.number, function(err, vehicle){
@@ -41,7 +36,6 @@ var VehicleCtrl = function(Vehicle){
 			});
 		});
 	}
-
 	VehicleObj.DeleteVehicle = function(req, res, next){
 		Vehicle.remove({number : req.params.number }, function(err, vehicle){
 			if(err) {
@@ -50,8 +44,6 @@ var VehicleCtrl = function(Vehicle){
 			res.json({status: true, message: "Vehicle deleted successfully"});
 		});
 	}
-
 	return VehicleObj;
 }
-
 module.exports = VehicleCtrl;
